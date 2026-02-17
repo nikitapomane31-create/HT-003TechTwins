@@ -182,6 +182,23 @@ var timer = setInterval(()=>{
 },1000);
 
 </script>
+<audio id="alarmSound" autoplay loop>
+    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
+</audio>
+
+<script>
+    var alarm = document.getElementById("alarmSound");
+
+    window.onload = function() {
+        alarm.play();
+    }
+
+    function stopAlarm() {
+        alarm.pause();
+        alarm.currentTime = 0;
+    }
+</script>
+
 
 </body>
 </html>
