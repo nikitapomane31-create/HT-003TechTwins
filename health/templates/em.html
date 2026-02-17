@@ -1,120 +1,73 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Emergency Dashboard</title>
+    <title>Emergency Helpline Numbers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    color: white;
-    overflow-x: hidden;
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#1e3c72,#2a5298);
+    color:white;
+    text-align:center;
 }
 
 /* HEADER */
-.header {
-    text-align: center;
-    padding: 30px;
-    font-size: 32px;
-    font-weight: bold;
-    letter-spacing: 2px;
+.header{
+    padding:30px;
+    font-size:30px;
+    font-weight:bold;
+    letter-spacing:2px;
 }
 
 /* GRID */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    padding: 40px;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    padding:40px;
 }
 
-/* CARD */
-.card {
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.4s;
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(10px);
-    background: rgba(255,255,255,0.08);
-    border: 2px solid rgba(255,255,255,0.1);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+/* CARD STYLE */
+.card{
+    background:white;
+    color:black;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.3);
+    transition:0.4s;
+    cursor:pointer;
 }
 
-.card:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+.card:hover{
+    transform:translateY(-10px) scale(1.05);
+    box-shadow:0 20px 40px rgba(0,0,0,0.5);
 }
 
-/* CARD ICON */
-.card h2 {
-    font-size: 22px;
-    margin-top: 15px;
+/* ICON */
+.icon{
+    font-size:50px;
+    margin-bottom:15px;
 }
 
-/* Different colors */
-.medical { border-left: 6px solid #00ffcc; }
-.police { border-left: 6px solid #0099ff; }
-.fire { border-left: 6px solid #ff3300; }
-.mental { border-left: 6px solid #cc66ff; }
-.women { border-left: 6px solid #ff66b2; }
-.location { border-left: 6px solid #ffff00; }
-
-/* Glow animation */
-.card::before {
-    content: "";
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    background: radial-gradient(circle, rgba(255,255,255,0.2), transparent);
-    top: -50%;
-    left: -50%;
-    transform: rotate(25deg);
-    animation: glow 6s linear infinite;
+/* NUMBER */
+.number{
+    font-size:22px;
+    font-weight:bold;
+    margin-top:10px;
 }
 
-@keyframes glow {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
+/* DIFFERENT COLORS */
+.ambulance{border-top:6px solid #00b894;}
+.police{border-top:6px solid #0984e3;}
+.fire{border-top:6px solid #d63031;}
+.women{border-top:6px solid #e84393;}
+.mental{border-top:6px solid #6c5ce7;}
+.disaster{border-top:6px solid #fdcb6e;}
 
-/* POPUP */
-.popup {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    justify-content: center;
-    align-items: center;
-}
-
-.popup-content {
-    background: white;
-    color: black;
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    width: 350px;
-    animation: zoom 0.3s ease;
-}
-
-@keyframes zoom {
-    from { transform: scale(0.5); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
-
-.popup button {
-    margin-top: 20px;
-    padding: 10px 25px;
-    border-radius: 20px;
-    border: none;
-    background: red;
-    color: white;
-    cursor: pointer;
+a{
+    text-decoration:none;
 }
 
 </style>
@@ -122,60 +75,46 @@ body {
 
 <body>
 
-<div class="header">🚨 EMERGENCY CONTROL CENTER</div>
+<div class="header">🚨 EMERGENCY HELPLINE NUMBERS</div>
 
 <div class="grid">
 
-    <div class="card medical" onclick="showPopup('🚑 Medical Emergency Activated!')">
-        <div style="font-size:40px;">🚑</div>
-        <h2>Medical Emergency</h2>
-    </div>
+    <a href="tel:108">
+        <div class="card ambulance">
+            <div class="icon">🚑</div>
+            <h3>Ambulance</h3>
+            <div class="number">108</div>
+        </div>
+    </a>
 
-    <div class="card police" onclick="showPopup('🚓 Police Alert Sent!')">
-        <div style="font-size:40px;">🚓</div>
-        <h2>Police</h2>
-    </div>
+    
+    
 
-    <div class="card fire" onclick="showPopup('🔥 Fire Department Alerted!')">
-        <div style="font-size:40px;">🔥</div>
-        <h2>Fire Emergency</h2>
-    </div>
+    <a href="tel:1091">
+        <div class="card women">
+            <div class="icon">👩</div>
+            <h3>Women Helpline</h3>
+            <div class="number">1091</div>
+        </div>
+    </a>
 
-    <div class="card mental" onclick="showPopup('🧠 Mental Health Support Contacted!')">
-        <div style="font-size:40px;">🧠</div>
-        <h2>Mental Health</h2>
-    </div>
+    <a href="tel:9152987821">
+        <div class="card mental">
+            <div class="icon">🧠</div>
+            <h3>Mental Health</h3>
+            <div class="number">9152987821</div>
+        </div>
+    </a>
 
-    <div class="card women" onclick="showPopup('👩 Women Safety Alert Triggered!')">
-        <div style="font-size:40px;">👩</div>
-        <h2>Women Safety</h2>
-    </div>
-
-    <div class="card location" onclick="showPopup('📍 Live Location Shared!')">
-        <div style="font-size:40px;">📍</div>
-        <h2>Share Location</h2>
-    </div>
+    <a href="tel:112">
+        <div class="card disaster">
+            <div class="icon">🚨</div>
+            <h3>National Emergency</h3>
+            <div class="number">112</div>
+        </div>
+    </a>
 
 </div>
-
-<!-- POPUP -->
-<div class="popup" id="popup">
-    <div class="popup-content">
-        <h2 id="popupText"></h2>
-        <button onclick="closePopup()">Close</button>
-    </div>
-</div>
-
-<script>
-function showPopup(message) {
-    document.getElementById("popupText").innerText = message;
-    document.getElementById("popup").style.display = "flex";
-}
-
-function closePopup() {
-    document.getElementById("popup").style.display = "none";
-}
-</script>
 
 </body>
 </html>
