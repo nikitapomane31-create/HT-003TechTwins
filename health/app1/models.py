@@ -15,14 +15,13 @@ class SymptomCheck(models.Model):
         return self.name
 
 
+
+
 class Medicine(models.Model):
     name = models.CharField(max_length=100)
-    dosage = models.CharField(max_length=100)
-    time = models.TimeField()
+    dosage = models.CharField(max_length=50)
+    reminder_time = models.TimeField()
     repeat_daily = models.BooleanField(default=True)
-    email_reminder = models.BooleanField(default=False)
-    sms_reminder = models.BooleanField(default=False)
-    voice_alert = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

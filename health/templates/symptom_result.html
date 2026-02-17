@@ -90,10 +90,14 @@ Risk Score: <strong>{{ score }}/14</strong>
 {% widthratio score 14 100 as percentage %}
 
 <div class="progress mt-3">
-  <div class="progress-bar bg-{{ color }}" 
-       role="progressbar" 
-       style="width: {{ percentage }}%">
-       {{ percentage }}%
+  <div class="progress-bar 
+              {% if color %}bg-{{ color }}{% else %}bg-success{% endif %}"
+       role="progressbar"
+       aria-valuenow="{{ percentage|default:0 }}"
+       aria-valuemin="0"
+       aria-valuemax="100">
+       
+       {{ percentage|default:0 }}%
   </div>
 </div>
 
