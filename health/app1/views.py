@@ -154,3 +154,22 @@ def save_sos(request):
         )
 
         return JsonResponse({"status": "success"})
+
+
+
+
+from django.http import JsonResponse
+import json
+from .models import Medicine   # make sure this import exists
+
+def set_reminder(request, id):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        time_str = data.get("time")
+
+        medicine = Medicine.objects.get(id=id)
+        medicine.reminder_time = time_str
+        medicine.status = "Scheduled"
+        medicine.save()
+
+        return JsonResponse({"message": "Reminder set successfully"})

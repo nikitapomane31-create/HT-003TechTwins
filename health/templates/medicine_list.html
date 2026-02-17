@@ -9,10 +9,10 @@
 
 /* 🌈 Background */
 body{
-    background: linear-gradient(135deg,#667eea,#764ba2);
+    background: linear-gradient(135deg,#8ac3c5,#98cece);
     min-height:100vh;
     font-family:'Segoe UI',sans-serif;
-    color:white;
+    color:rgb(14, 12, 12);
 }
 
 /* Navbar */
@@ -61,8 +61,7 @@ body{
 </head>
 
 <body>
-
-<!-- 🌐 Navbar -->
+<div class="hero-section" style="background-image: url('/static/images/host.jpg');">
 <nav class="navbar navbar-dark p-3">
 <div class="container-fluid">
 <h4>💊 Smart Medicine Reminder</h4>
@@ -107,7 +106,7 @@ body{
 </span>
 {% else %}
 <span class="badge badge-pending">
-Pending
+<button><a href="{% url 'medi' %}">Reminder</a></button>
 </span>
 {% endif %}
 
@@ -191,6 +190,7 @@ function checkReminder(){
 setInterval(checkReminder, 30000);
 
 </script>
+</div>
 
 </body>
 </html>
