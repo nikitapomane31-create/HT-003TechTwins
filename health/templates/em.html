@@ -8,6 +8,52 @@
 </head>
 <body>
 
+    <!-- Location Button -->
+<div class="location-section">
+    <button class="location-btn" onclick="getLocation()">📍 Share My Live Location</button>
+</div>
+
+<!-- Map -->
+<div id="map"></div>
+
+<!-- Google Maps Script -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+
+<script>
+    let map, marker;
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+
+        const location = { lat: lat, lng: lng };
+
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: location,
+            zoom: 16,
+        });
+
+        marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            title: "Your Current Location 🚑",
+        });
+    }
+
+    function showError(error) {
+        alert("Location access denied. Please allow GPS.");
+    }
+</script>
+
+
 <div class="emergency-container">
 
     <!-- Header -->
