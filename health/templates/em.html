@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Emergency Help</title>
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+</head>
+<body>
+
+<div class="emergency-container">
+
+    <!-- Header -->
+    <h1 class="emergency-title">🚨 Emergency Assistance</h1>
+    <p class="subtitle">Quick help when every second matters</p>
+
+    <!-- SOS Button -->
+    <div class="sos-section">
+        <button class="sos-btn">SEND SOS</button>
+        <p class="sos-text">Tap to alert emergency services</p>
+    </div>
+
+    <!-- Emergency Calls -->
+    <div class="card-section">
+        <h2>📞 Emergency Calls</h2>
+        <div class="card-grid">
+            <a href="tel:108" class="card red">🚑 Ambulance<br><span>108</span></a>
+            <a href="tel:100" class="card blue">👮 Police<br><span>100</span></a>
+            <a href="tel:101" class="card orange">🔥 Fire<br><span>101</span></a>
+            <a href="tel:181" class="card pink">👩 Women Helpline<br><span>181</span></a>
+        </div>
+    </div>
+
+    <!-- Location -->
+    <div class="location-section">
+        <button class="location-btn">📍 Share My Location</button>
+    </div>
+
+    <!-- First Aid -->
+    <div class="firstaid-section">
+        <h2>🩹 First Aid Tips</h2>
+        <ul>
+            <li>❤️ <strong>Heart Attack:</strong> Sit, relax, call ambulance</li>
+            <li>🤕 <strong>Bleeding:</strong> Apply pressure</li>
+            <li>🤒 <strong>Fever:</strong> Give fluids, rest</li>
+            <li>🐍 <strong>Snake Bite:</strong> Keep still, rush to hospital</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>

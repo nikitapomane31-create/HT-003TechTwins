@@ -5,3 +5,6 @@ def home(request):
 
 def medi(request):
     return render(request, 'medi.html')
+
+def em(request):
+    return render(request, 'em.html')

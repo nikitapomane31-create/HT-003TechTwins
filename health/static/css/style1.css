@@ -121,3 +121,123 @@ header p {
 .emergency button:hover {
     background: #e63939;
 }
+
+
+
+/*emergency.css*/
+
+.emergency-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+}
+
+.emergency-title {
+    text-align: center;
+    color: #d32f2f;
+    font-size: 36px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* SOS */
+.sos-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.sos-btn {
+    background: #e53935;
+    color: white;
+    border: none;
+    padding: 25px 60px;
+    font-size: 26px;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(229,57,53,0.6);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 rgba(229,57,53,0.6); }
+    50% { box-shadow: 0 0 25px rgba(229,57,53,1); }
+    100% { box-shadow: 0 0 0 rgba(229,57,53,0.6); }
+}
+
+.sos-text {
+    margin-top: 10px;
+    color: #777;
+}
+
+/* Cards */
+.card-section h2 {
+    margin-bottom: 15px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    text-decoration: none;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 18px;
+    transition: transform 0.2s;
+}
+
+.card span {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.red { background: #e53935; }
+.blue { background: #1e88e5; }
+.orange { background: #fb8c00; }
+.pink { background: #d81b60; }
+
+/* Location */
+.location-section {
+    text-align: center;
+    margin: 40px 0;
+}
+
+.location-btn {
+    background: #26a69a;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 18px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+/* First Aid */
+.firstaid-section {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.firstaid-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.firstaid-section li {
+    margin-bottom: 12px;
+    font-size: 16px;
+}
