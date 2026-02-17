@@ -1,99 +1,227 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Emergency Help</title>
-    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+<meta charset="UTF-8">
+<title>AI Emergency SOS</title>
+
+<style>
+:root{
+    --bg:#eef6ff;
+    --card:#ffffff;
+    --text:#111;
+    --accent:#ff3b3b;
+}
+.dark{
+    --bg:#020617;
+    --card:#0f172a;
+    --text:#e5e7eb;
+}
+body{
+    margin:0;
+    font-family:Poppins, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.3s;
+}
+.header{
+    padding:20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.toggle{
+    padding:10px 18px;
+    border-radius:20px;
+    border:none;
+    background:#38bdf8;
+    cursor:pointer;
+}
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:20px;
+}
+.card{
+    background:var(--card);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+    margin-bottom:30px;
+}
+.sos-btn{
+    width:100%;
+    padding:20px;
+    border:none;
+    border-radius:50px;
+    font-size:20px;
+    font-weight:bold;
+    background:var(--accent);
+    color:white;
+    cursor:pointer;
+    animation:pulse 1.4s infinite;
+}
+@keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(255,59,59,.6)}
+    70%{box-shadow:0 0 0 30px rgba(255,59,59,0)}
+    100%{box-shadow:0 0 0 0 rgba(255,59,59,0)}
+}
+#map{
+    width:100%;
+    height:300px;
+    border-radius:15px;
+    margin-top:15px;
+}
+.status{
+    margin-top:10px;
+    font-weight:500;
+}
+.popup{
+    position:fixed;
+    inset:0;
+    display:none;
+    background:rgba(0,0,0,.7);
+    justify-content:center;
+    align-items:center;
+}
+.popup-box{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    animation:slide .4s ease;
+}
+@keyframes slide{
+    from{transform:translateY(40px);opacity:0}
+    to{transform:translateY(0);opacity:1}
+}
+.close{
+    margin-top:15px;
+    padding:10px 25px;
+    border:none;
+    border-radius:20px;
+    background:black;
+    color:white;
+    cursor:pointer;
+}
+.voice{
+    margin-top:15px;
+    padding:12px 25px;
+    border:none;
+    border-radius:25px;
+    background:#22c55e;
+    color:white;
+    cursor:pointer;
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Location Button -->
-<div class="location-section">
-    <button class="location-btn" onclick="getLocation()">📍 Share My Live Location</button>
+<div class="header">
+    <h2>🚨 AI Emergency SOS</h2>
+    <button class="toggle" onclick="toggleDark()">🌙 Dark Mode</button>
 </div>
 
-<!-- Map -->
-<div id="map"></div>
+<div class="container">
 
-<!-- Google Maps Script -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+<!-- SOS CARD -->
+<div class="card">
+    <h3>🚑 One-Tap Emergency SOS</h3>
+    <button class="sos-btn" onclick="activateSOS()">ACTIVATE SOS</button>
+    <div class="status" id="status"></div>
+    <div id="map"></div>
+</div>
+
+<!-- VOICE SOS -->
+<div class="card">
+    <h3>🎙 Voice-Activated SOS</h3>
+    <p>Say <b>“Help me”</b> or <b>“Emergency”</b></p>
+    <button class="voice" onclick="startVoice()">Start Voice Listening</button>
+</div>
+
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+    <div class="popup-box">
+        <h2>🚨 SOS SENT</h2>
+        <p>📍 Location shared<br>📱 WhatsApp alert sent</p>
+        <button class="close" onclick="closePopup()">Close</button>
+    </div>
+</div>
 
 <script>
-    let map, marker;
+let map, marker;
 
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition, showError);
-        } else {
-            alert("Geolocation is not supported by this browser.");
+/* DARK MODE */
+function toggleDark(){
+    document.body.classList.toggle("dark");
+}
+
+/* GOOGLE MAPS LIVE LOCATION */
+function initMap(lat, lng){
+    map = new google.maps.Map(document.getElementById("map"), {
+        center:{lat,lng},
+        zoom:15
+    });
+    marker = new google.maps.Marker({
+        position:{lat,lng},
+        map:map
+    });
+}
+
+/* SOS FUNCTION */
+function activateSOS(){
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(pos=>{
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+
+            initMap(lat,lng);
+
+            document.getElementById("status").innerHTML =
+            `📍 Live Location: ${lat.toFixed(4)}, ${lng.toFixed(4)}`;
+
+            // WhatsApp Alert
+            const msg = `🚨 EMERGENCY SOS 🚨
+I need help!
+📍 Location:
+https://maps.google.com/?q=${lat},${lng}`;
+
+            window.open(
+              `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent(msg)}`,
+              "_blank"
+            );
+
+            document.getElementById("popup").style.display="flex";
+        });
+    }
+}
+
+/* VOICE ACTIVATION */
+function startVoice(){
+    const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.lang="en-IN";
+
+    recognition.onresult = function(event){
+        const text = event.results[0][0].transcript.toLowerCase();
+        if(text.includes("help") || text.includes("emergency")){
+            activateSOS();
         }
     }
+    recognition.start();
+}
 
-    function showPosition(position) {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-
-        const location = { lat: lat, lng: lng };
-
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: location,
-            zoom: 16,
-        });
-
-        marker = new google.maps.Marker({
-            position: location,
-            map: map,
-            title: "Your Current Location 🚑",
-        });
-    }
-
-    function showError(error) {
-        alert("Location access denied. Please allow GPS.");
-    }
+/* POPUP */
+function closePopup(){
+    document.getElementById("popup").style.display="none";
+}
 </script>
 
-
-<div class="emergency-container">
-
-    <!-- Header -->
-    <h1 class="emergency-title">🚨 Emergency Assistance</h1>
-    <p class="subtitle">Quick help when every second matters</p>
-
-    <!-- SOS Button -->
-    <div class="sos-section">
-        <button class="sos-btn">SEND SOS</button>
-        <p class="sos-text">Tap to alert emergency services</p>
-    </div>
-
-    <!-- Emergency Calls -->
-    <div class="card-section">
-        <h2>📞 Emergency Calls</h2>
-        <div class="card-grid">
-            <a href="tel:108" class="card red">🚑 Ambulance<br><span>108</span></a>
-            <a href="tel:100" class="card blue">👮 Police<br><span>100</span></a>
-            <a href="tel:101" class="card orange">🔥 Fire<br><span>101</span></a>
-            <a href="tel:181" class="card pink">👩 Women Helpline<br><span>181</span></a>
-        </div>
-    </div>
-
-    <!-- Location -->
-    <div class="location-section">
-        <button class="location-btn">📍 Share My Location</button>
-    </div>
-
-    <!-- First Aid -->
-    <div class="firstaid-section">
-        <h2>🩹 First Aid Tips</h2>
-        <ul>
-            <li>❤️ <strong>Heart Attack:</strong> Sit, relax, call ambulance</li>
-            <li>🤕 <strong>Bleeding:</strong> Apply pressure</li>
-            <li>🤒 <strong>Fever:</strong> Give fluids, rest</li>
-            <li>🐍 <strong>Snake Bite:</strong> Keep still, rush to hospital</li>
-        </ul>
-    </div>
-
-</div>
+<!-- GOOGLE MAPS -->
+<script src="https://www.google.com/maps?q=18.1604,74.5798"></script>
 
 </body>
 </html>

@@ -16,6 +16,20 @@ class SymptomCheck(models.Model):
 
 
 
+from django.db import models
+
+class EmergencyAlert(models.Model):
+    name = models.CharField(max_length=100)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    location_link = models.URLField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+
 
 class Medicine(models.Model):
     name = models.CharField(max_length=100)

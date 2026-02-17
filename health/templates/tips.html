@@ -1,0 +1,205 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Health Tips | Health Care Assistant</title>
+
+    <!-- INTERNAL CSS -->
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #cfe9f7, #eef6fb);
+        }
+
+        .tips-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .tips-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tips-header h1 {
+            font-size: 36px;
+            color: #0a4d68;
+        }
+
+        .tips-header p {
+            color: #555;
+            font-size: 15px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .tip-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+        }
+
+        .tip-card h3 {
+            margin: 0;
+            color: #0a4d68;
+            font-size: 18px;
+        }
+
+        .tip-card p {
+            font-size: 14px;
+            color: #444;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        .tag {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 6px 14px;
+            background: #0dcaf0;
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .emergency {
+            border-left: 6px solid red;
+        }
+
+        .hackathon {
+            border-left: 6px solid #7b2cbf;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .cta-section button {
+            background: linear-gradient(135deg, #0a4d68, #0081a7);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .cta-section button:hover {
+            background: linear-gradient(135deg, #063547, #005f73);
+        }
+
+        #randomTip {
+            margin-top: 18px;
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="tips-container">
+
+    <div class="tips-header">
+        <h1>💡 Smart Health Tips</h1>
+        <p>Hackathon-powered wellness & safety guidance</p>
+    </div>
+
+    <div class="tips-grid">
+
+        <div class="tip-card">
+            <h3>💧 Stay Hydrated</h3>
+            <p>Drink at least 8 glasses of water daily to keep your body energized.</p>
+            <span class="tag">Daily Habit</span>
+        </div>
+
+        <div class="tip-card">
+            <h3>😴 Quality Sleep</h3>
+            <p>7–8 hours of sleep improves focus, immunity, and mental health.</p>
+            <span class="tag">Mental Wellness</span>
+        </div>
+
+        <div class="tip-card">
+            <h3>🥗 Balanced Diet</h3>
+            <p>Add fruits, vegetables, and proteins to every meal for nutrition.</p>
+            <span class="tag">Nutrition</span>
+        </div>
+
+        <div class="tip-card">
+            <h3>🏃‍♀️ Daily Exercise</h3>
+            <p>30 minutes of walking or yoga improves heart health.</p>
+            <span class="tag">Fitness</span>
+        </div>
+
+        <div class="tip-card emergency">
+            <h3>🚨 Emergency Awareness</h3>
+            <p>Save emergency contacts and share live location during danger.</p>
+            <span class="tag">Safety First</span>
+        </div>
+
+        <div class="tip-card hackathon">
+            <h3>🤖 Hackathon Smart Feature</h3>
+            <p>AI reminders + live tracking improve medication adherence.</p>
+            <span class="tag">Innovation</span>
+        </div>
+
+        <div class="tip-card">
+    <h3>🧘 Stress Management</h3>
+    <p>Practice meditation, deep breathing, or hobbies to reduce stress and improve mental health.</p>
+    <span class="tag">Mind Care</span>
+</div>
+
+        <div class="tip-card">
+    <h3>🧴 Personal Hygiene</h3>
+    <p>Wash hands regularly and maintain cleanliness to prevent infections and illnesses.</p>
+    <span class="tag">Clean Living</span>
+</div>
+
+
+    </div>
+
+    <div class="cta-section">
+        <button onclick="showTip()">✨ Get Random Tip</button>
+        <p id="randomTip"></p>
+    </div>
+
+</div>
+
+<!-- INTERNAL JS -->
+<script>
+    const tips = [
+        "Drink water right after waking up 💧",
+        "Avoid phone usage before sleep 📵",
+        "Stretch every hour 🧘‍♀️",
+        "Enable live location sharing 📍",
+        "Take medicines on time ⏰",
+        "Keep emergency numbers ready 🚨"
+    ];
+
+    function showTip() {
+        const randomTip = tips[Math.floor(Math.random() * tips.length)];
+        document.getElementById("randomTip").innerText = randomTip;
+    }
+</script>
+
+</body>
+</html>

@@ -11,6 +11,10 @@ def home(request):
 def medi(request):
     return render(request, 'medi.html')
 
+def tips(request):
+    return render(request, 'tips.html')
+
+
 
 def em(request):
     return render(request, 'em.html')
@@ -118,3 +122,35 @@ def mark_taken(request, id):
     medicine.save()
     return redirect('medicine_list')
 
+
+
+
+
+
+from django.shortcuts import render
+from django.http import JsonResponse
+from .models import EmergencyAlert
+import json
+
+def emergency_page(request):
+    return render(request, "emergency.html")
+
+
+def save_sos(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+
+        name = data.get("name")
+        lat = data.get("latitude")
+        lng = data.get("longitude")
+
+        link = f"https://www.google.com/maps?q={lat},{lng}"
+
+        EmergencyAlert.objects.create(
+            name=name,
+            latitude=lat,
+            longitude=lng,
+            location_link=link
+        )
+
+        return JsonResponse({"status": "success"})
