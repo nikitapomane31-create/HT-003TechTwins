@@ -1,0 +1,169 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Medicine</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url("{% static 'images/bg.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            color: #fff;
+        }
+
+        .form-box h2 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group textarea {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .row .input-group {
+            flex: 1;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background: #00c9a7;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #009e87;
+            transform: translateY(-3px);
+        }
+
+        @media(max-width: 600px) {
+            .row {
+                flex-direction: column;
+            }
+        }
+
+        
+    </style>
+
+</head>
+
+<body>
+<div class="hero-section" style="background-image: url('/static/images/dash.jpg');"></div>
+<div class="container">
+    <div class="form-box">
+        <h2>💊 Add New Medicine</h2>
+        <p class="subtitle">Stay healthy, never miss a dose</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="input-group">
+                <label>Medicine Name</label>
+                <input type="text" name="medicine_name" placeholder="Enter medicine name" required>
+            </div>
+
+            <div class="input-group">
+                <label>Dosage</label>
+                <input type="text" name="dosage" placeholder="e.g. 500mg" required>
+            </div>
+
+            <div class="input-group">
+                <label>Frequency</label>
+                <select name="frequency" required>
+                    <option value="">Select Frequency</option>
+                    <option>Once a Day</option>
+                    <option>Twice a Day</option>
+                    <option>Three Times a Day</option>
+                    <option>Weekly</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="input-group">
+                    <label>Start Date</label>
+                    <input type="date" name="start_date" required>
+                </div>
+
+                <div class="input-group">
+                    <label>End Date</label>
+                    <input type="date" name="end_date">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Reminder Time</label>
+                <input type="time" name="reminder_time" required>
+            </div>
+
+            <div class="input-group">
+                <label>Additional Notes</label>
+                <textarea name="notes" rows="3" placeholder="Optional notes..."></textarea>
+            </div>
+
+            <button type="submit" class="btn">➕ Add Medicine</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Health Care Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="hero-section" style="background-image: url('/static/images/dash.jpg');">
+
+<div class="container">
+
+    <!-- Header -->
+    <header>
+        <h2>🏥 Health Care Assistant</h2>
+        <p>Welcome back, stay healthy 💙</p>
+    </header>
+
+    <!-- Cards Section -->
+    <div class="cards">
+
+        <div class="card">
+            <i class="fas fa-pills"></i>
+            <h3>Medication Reminder</h3>
+            <p>Never miss your medicine</p>
+            <button><a href="{% url 'medi' %}">Add Medicine</a></button>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-stethoscope"></i>
+            <h3>Symptom Checker</h3>
+            <p>Get basic health guidance</p>
+            <button>Check Symptoms</button>
+        </div>
+
+        <div class="card emergency">
+            <i class="fas fa-ambulance"></i>
+            <h3>Emergency</h3>
+            <p>Quick access to health info</p>
+            <button>View Details</button>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-heartbeat"></i>
+            <h3>Health Tips</h3>
+            <p>Daily wellness advice</p>
+            <button>View Tips</button>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
