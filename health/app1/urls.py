@@ -22,9 +22,7 @@ urlpatterns = [
 
     
 
-    path('add-medicine/', views.add_medicine, name='add_medicine'),
-    path('medicine-list/', views.medicine_list, name='medicine_list'),
-    path('edit-medicine/<int:id>/', views.edit_medicine, name='edit_medicine'),
-    path('delete-medicine/<int:id>/', views.delete_medicine, name='delete_medicine'),
+    
+   
 
 ]

@@ -11,10 +11,9 @@ def home(request):
 def medi(request):
     return render(request, 'medi.html')
 
-<<<<<<< HEAD
+
 def em(request):
     return render(request, 'em.html')
-=======
 
 from django.shortcuts import render
 from .models import SymptomCheck
@@ -106,28 +105,16 @@ def edit_medicine(request, pk):
     return render(request, 'add_medicine.html', {'form': form})
 
 
-<<<<<<< HEAD
+
 def reminder(request):
     return render(request, 'reminder.html')
-=======
 
 
-send_mail(
-    "Medicine Reminder",
-    "Time to take your medicine",
-    "yourgmail@gmail.com",
-    ["patient@email.com"],
-)
 
 
-from twilio.rest import Client
+def mark_taken(request, id):
+    medicine = get_object_or_404(Medicine, id=id)
+    medicine.is_taken = True
+    medicine.save()
+    return redirect('medicine_list')
 
-client = Client("ACCOUNT_SID", "AUTH_TOKEN")
-
-client.messages.create(
-    body="Time to take your medicine",
-    from_="+1234567890",
-    to="+91XXXXXXXXXX"
-)
->>>>>>> bbf10c96cd06c2fa2c5d30b5fef2c31c88cdf88a
->>>>>>> 3b027e2111f153399c5a39b87046fe9ca7475819
