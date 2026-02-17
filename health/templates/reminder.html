@@ -41,6 +41,7 @@ body{
     animation: popup 0.6s ease;
 }
 
+
 @keyframes popup{
     from{transform:scale(0.7);opacity:0;}
     to{transform:scale(1);opacity:1;}
@@ -108,6 +109,7 @@ body{
 
 <!-- Buttons -->
 <div class="mt-4">
+    
 
 <button class="btn btn-custom stop"
         onclick="stopAlarm()">
@@ -135,69 +137,27 @@ body{
 </audio>
 
 <script>
+function setReminder(medicineId) {
+    let time = prompt("Enter reminder time (HH:MM format, 24hr):");
 
-var alarm = document.getElementById("alarmSound");
-
-/* 🔊 Voice Reminder */
-var speech = new SpeechSynthesisUtterance(
-    "Reminder. Time to take {{ med.name }}. Dosage {{ med.dosage }}"
-);
-speech.lang = "en-US";
-window.speechSynthesis.speak(speech);
-
-/* 🔕 Stop Alarm */
-function stopAlarm(){
-    alarm.pause();
-    alarm.currentTime = 0;
+    if (time) {
+        fetch(`/set_reminder/${medicineId}/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify({ time: time })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Reminder Set Successfully!");
+            location.reload();
+        });
+    }
 }
-
-/* 😴 Snooze 5 Minutes */
-function snoozeAlarm(){
-
-    stopAlarm();
-
-    alert("Snoozed for 5 minutes 😴");
-
-    setTimeout(()=>{
-        alarm.play();
-        window.speechSynthesis.speak(speech);
-    }, 300000); // 5 min
-}
-
-/* ⏳ Auto Close Progress (60 sec) */
-
-var timeLeft = 60;
-var bar = document.getElementById("progressBar");
-
-var timer = setInterval(()=>{
-
-    timeLeft--;
-    bar.style.width = timeLeft + "%";
-
-    if(timeLeft <= 0){
-        clearInterval(timer);
-        window.close(); // auto close
-    }
-
-},1000);
-
 </script>
-<audio id="alarmSound" autoplay loop>
-    <source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" type="audio/ogg">
-</audio>
 
-<script>
-    var alarm = document.getElementById("alarmSound");
-
-    window.onload = function() {
-        alarm.play();
-    }
-
-    function stopAlarm() {
-        alarm.pause();
-        alarm.currentTime = 0;
-    }
-</script>
 
 
 </body>

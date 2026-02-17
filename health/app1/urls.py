@@ -5,6 +5,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('medi/', views.medi, name='medi'),
     path('tips/', views.tips, name='tips'),
+     path('set_reminder/<int:id>/', views.set_reminder, name='set_reminder'),
 
 
     path('em/', views.em, name='em'),
